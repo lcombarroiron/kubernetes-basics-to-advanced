@@ -1,10 +1,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: web-gateway
+  name: colors-gateway
+  namespace: default
 spec:
-  gatewayClassName: nginx-gateway-class
+  gatewayClassName: nginx
   listeners:
     - name: http
       protocol: HTTP
       port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same
