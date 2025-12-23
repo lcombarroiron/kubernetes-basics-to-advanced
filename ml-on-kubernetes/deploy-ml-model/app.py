@@ -5,12 +5,16 @@ import joblib, numpy as np
 app = FastAPI()
 model = joblib.load("model.pkl")
 
+
 class Instance(BaseModel):
     data: list
 
+
+# Used by Kubernetes liveness and readiness probes
 @app.get("/healthz")
 def healthz():
     return {"status": "ok"}
+
 
 @app.post("/predict")
 def predict(inst: Instance):
